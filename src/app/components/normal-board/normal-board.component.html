@@ -3,11 +3,14 @@
     <button>
       <img src="./../../../assets/delete.png" alt="x">
     </button>
-    <div class="title">Board</div>
+    <textarea class="title"
+      rows="1" spellcheck="false" [contentEditable]="true" maxlength="20"
+      (keydown.enter)="titleTxt.blur()" #titleTxt [(ngModel)]="board.name">{{board.name}}</textarea>
   </div>
   <div class="content">
-    <div class="create-task">
+    <div *ngIf="board.tasks.length === 0" class="create-task">
       <button>+</button>
     </div>
+    <app-task [task]="task" *ngFor="let task of board.tasks"></app-task>
   </div>
 </div>

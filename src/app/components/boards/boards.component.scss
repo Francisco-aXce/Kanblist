@@ -1,0 +1,15 @@
+.container {
+  display: flex;
+  flex-direction: row;
+  background-color: #77c89e;
+  position: absolute;
+  top: 120px;
+  left: 20px;
+  right: 20px;
+  bottom: 60px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  > *{
+    margin: 10px;
+  }
+}
