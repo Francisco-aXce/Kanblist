@@ -1,0 +1,88 @@
+.modal{
+  background-color: rgba($color: #000000, $alpha: 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+}
+
+.close{
+  margin: 5px 0 5px 5px;
+  border-radius: 50%;
+  background-color: #EBEBEB;
+  border: 1px solid black;
+}
+
+.add {
+  margin-top: 20px;
+  background-color: #03DAC6;
+  width: 80px;
+  border: 1.5px solid black;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.modal-body {
+  background-color: white;
+  width: calc(100% - 70px);
+  height: 340px;
+  border-radius: 10px;
+  textarea {
+    resize: none;
+    width: calc(100% - 50px);
+    height: 80px;
+    margin-bottom: 20px;
+    margin-left: 20px;
+    background-color: #EBEBEB;
+  }
+}
+
+.modal-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  > h1{
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 15px;
+  }
+}
+
+.main-input {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+
+  label{
+    margin-left: 20px;
+  }
+
+  input {
+    width: calc(100% - 50px);
+    margin-left: 20px;
+    margin-bottom: 20px;
+    background-color: #EBEBEB;
+    border: 1px solid gray;
+    border-radius: 3px;
+  }
+}
+
+.secondary-input {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+
+  div {
+    display: flex;
+    flex-direction: column;
+    margin: 0 20px;
+
+    input, select {
+      background-color: #EBEBEB;
+      border: 1px solid gray;
+    }
+  }
+}

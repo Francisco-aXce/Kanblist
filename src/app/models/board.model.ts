@@ -1,11 +1,11 @@
 export interface Board {
-  id: string,
+  id: number,
   name: string,
   tasks: Task[]
 }
 
 export interface Task {
-  id: string,
+  id: number,
   name: string,
   description: string,
   status: string,

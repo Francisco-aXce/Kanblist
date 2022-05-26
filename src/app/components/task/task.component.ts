@@ -10,7 +10,7 @@ import { Board, Task, Priority } from './../../models/board.model';
 export class TaskComponent implements OnInit {
 
   @Input() task: Task = {
-    id: '',
+    id: 0,
     name: '',
     description: '',
     status: '',

@@ -9,6 +9,9 @@ import { NormalBoardComponent } from './components/normal-board/normal-board.com
 import { BoardsComponent } from './components/boards/boards.component';
 import { TaskComponent } from './components/task/task.component';
 import { AddBoardComponent } from './components/add-board/add-board.component';
+import { AddTaskModalComponent } from './components/add-task-modal/add-task-modal.component';
+import { BoardsModeComponent } from './pages/boards-mode/boards-mode.component';
+import { ListModeComponent } from './pages/list-mode/list-mode.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +20,10 @@ import { AddBoardComponent } from './components/add-board/add-board.component';
     NormalBoardComponent,
     BoardsComponent,
     TaskComponent,
-    AddBoardComponent
+    AddBoardComponent,
+    AddTaskModalComponent,
+    BoardsModeComponent,
+    ListModeComponent
   ],
   imports: [
     BrowserModule,
