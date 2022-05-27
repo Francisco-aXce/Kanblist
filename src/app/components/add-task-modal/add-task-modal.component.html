@@ -19,7 +19,8 @@
         </div>
         <div>
           <label for="status">Status</label>
-          <input type="text" name="status" id="status" placeholder="status" [(ngModel)]="taskToAdd.status">
+          <input type="text" name="status" id="status" placeholder="status" maxlength="8"
+          [(ngModel)]="taskToAdd.status">
         </div>
       </div>
       <button [disabled]="!form.valid" type="submit" class="add" (click)="onAddTask()" >Add</button>

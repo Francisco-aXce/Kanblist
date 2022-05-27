@@ -45,6 +45,7 @@ export class AddTaskModalComponent implements OnInit {
   }
 
   onAddTask(){
+    this.taskToAdd.status = this.taskToAdd.status === "" ? "none" : this.taskToAdd.status;
     this.boardService.addTask(this.boardService.modifyingBoard, {...this.taskToAdd});
     this.boardService.$addTask.emit(false);
     this.resetTask();

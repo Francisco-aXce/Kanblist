@@ -91,4 +91,9 @@ export class BoardsService {
     this.organizeIds();
   }
 
+  deleteTask(boardIndex: number, taskIndex: number) {
+    this.boards[boardIndex].tasks.splice(taskIndex,1);
+    this.organizeIds();
+  }
+
 }

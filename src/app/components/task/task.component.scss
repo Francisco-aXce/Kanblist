@@ -1,8 +1,44 @@
-.container {
+.options {
+  display: flex;
+  flex-direction: column;
+  background-color: #7D8BDE;
+  width: 195px;
+  height: 80px;
+  border-top: 1.5px solid black;
+  border-bottom: 1.5px solid black;
+
+  .opt-buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 5px;
+
+    button {
+      width: 100px;
+      margin: 3px 10px;
+    }
+  }
+
+  .back-button {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    width: 100%;
+    height: 20px;
+
+    button {
+      padding: 0;
+      width: 20px;
+      height: 100%;
+    }
+  }
+}
+
+.container{
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  background-color: #ECAC43;
+  background-color: #7D8BDE;
   width: 195px;
   height: 80px;
   border-top: 1.5px solid black;
@@ -34,6 +70,7 @@
       height: 100%;
       line-height: 0px;
       padding-bottom: 30px;
+      overflow: hidden;
       cursor: pointer;
     }
   }
@@ -47,7 +84,7 @@
     height: 45px;
 
     > div {
-      background-color: red;
+      background-color: #F2E7FE;
       font-weight: bold;
       font-size: 14px;
       margin: 5px;

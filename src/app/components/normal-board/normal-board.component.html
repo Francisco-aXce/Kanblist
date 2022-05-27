@@ -8,9 +8,9 @@
       (keydown.enter)="titleTxt.blur()" #titleTxt [(ngModel)]="board.name">{{board.name}}</textarea>
   </div>
   <div class="content">
-    <app-task [task]="task" *ngFor="let task of board.tasks"></app-task>
-    <div class="create-task">
-      <button (click)="onAddTask()">+</button>
-    </div>
+    <app-task [boardId]="board.id" [task]="task" *ngFor="let task of board.tasks"></app-task>
+    <button (click)="onAddTask()" class="create-task">
+      <div>+</div>
+    </button>
   </div>
 </div>

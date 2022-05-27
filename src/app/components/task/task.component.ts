@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 
-import { Board, Task, Priority } from './../../models/board.model';
+import { BoardsService } from './../../services/boards.service';
+import { Task, Priority } from './../../models/board.model';
 
 @Component({
   selector: 'app-task',
@@ -8,6 +9,10 @@ import { Board, Task, Priority } from './../../models/board.model';
   styleUrls: ['./task.component.scss']
 })
 export class TaskComponent implements OnInit {
+
+  more = document.getElementById('moreButton');
+
+  showOptions = false;
 
   @Input() task: Task = {
     id: 0,
@@ -17,9 +22,28 @@ export class TaskComponent implements OnInit {
     priority: Priority.unassigned
   };
 
-  constructor() { }
+  @Input() boardId: number = -1;
+
+  constructor(
+    private boardService:BoardsService
+    ) { }
 
   ngOnInit(): void {
+
+  }
+
+  toggleOptions()
+  {
+    this.showOptions = !this.showOptions;
+  }
+
+  duplicate() {
+    this.boardService.addTask(this.boardId, this.task);
+    this.showOptions = false;
+  }
+
+  delete(){
+    this.boardService.deleteTask(this.boardId, this.task.id);
   }
 
 }
