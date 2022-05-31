@@ -7,9 +7,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavComponent implements OnInit {
 
+  showViewOptions: boolean = false;
+
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  toggleVOptions() {
+    this.showViewOptions = !this.showViewOptions;
   }
 
 }

@@ -17,6 +17,10 @@
     </div>
   </div>
   <div class="view">
-    <button>VIEW</button>
+    <nav [class.active]="showViewOptions">
+      <a href="boards">Boards</a>
+      <a href="list">List</a>
+    </nav>
+    <button (click)="toggleVOptions()">VIEW</button>
   </div>
 </div>
