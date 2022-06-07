@@ -1,3 +1,4 @@
+import { moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { EventEmitter, Injectable } from '@angular/core';
 
 import { Board, Priority, Task } from './../models/board.model';
@@ -94,6 +95,21 @@ export class BoardsService {
   deleteTask(boardIndex: number, taskIndex: number) {
     this.boards[boardIndex].tasks.splice(taskIndex,1);
     this.organizeIds();
+  }
+
+  reorganizeTask(list: Task[], previousIndex: number, currentIndex: number){
+    moveItemInArray(list, previousIndex, currentIndex);
+    this.organizeIds()
+  }
+
+  transferTask(fromList: Task[], toList: Task[], fromIndex: number, toIndex: number){
+    transferArrayItem(fromList, toList, fromIndex, toIndex);
+    this.organizeIds()
+  }
+
+  reorganizeBoard(list: Board[], previousIndex: number, currentIndex: number){
+    moveItemInArray(list, previousIndex, currentIndex);
+    this.organizeIds()
   }
 
 }

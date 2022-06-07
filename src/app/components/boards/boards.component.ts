@@ -1,3 +1,4 @@
+import { CdkDragDrop } from '@angular/cdk/drag-drop';
 import { Component, OnInit } from '@angular/core';
 
 import { Board } from './../../models/board.model';
@@ -12,6 +13,8 @@ export class BoardsComponent implements OnInit {
 
   boards: Board[] = [];
 
+  canDrag: boolean = true;
+
   constructor(
     private boardsService:BoardsService
   ) {
@@ -19,6 +22,18 @@ export class BoardsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+  }
+
+  changeDrag(value: boolean) {
+    this.canDrag = value;
+  }
+
+  moveBoard(drop: CdkDragDrop<Board>) {
+    const { previousIndex, currentIndex } = drop;
+
+    if (previousIndex === currentIndex) return;
+
+    this.boardsService.reorganizeBoard(this.boards, previousIndex, currentIndex);
   }
 
 }

@@ -1,4 +1,6 @@
-<div class="container">
-  <app-normal-board [board]="board" *ngFor="let board of boards"></app-normal-board>
+<div class="container" cdkDropList cdkDropListOrientation="horizontal" cdkDropListGroup
+(cdkDropListDropped)="moveBoard($event)">
+  <app-normal-board cdkDrag [cdkDragDisabled]="!canDrag" (dragChange)="changeDrag($event)"
+  [board]="board" *ngFor="let board of boards"></app-normal-board>
   <app-add-board></app-add-board>
 </div>

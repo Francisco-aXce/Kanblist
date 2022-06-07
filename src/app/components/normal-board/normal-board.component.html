@@ -3,12 +3,15 @@
     <button (click)="onDeleteBoard()">
       <img src="./../../../assets/delete.png" alt="x">
     </button>
-    <textarea class="title"
+    <textarea class="title" (focus)="drag(false)" (blur)="drag(true)"
       rows="1" spellcheck="false" maxlength="20"
       (keydown.enter)="titleTxt.blur()" #titleTxt [(ngModel)]="board.name">{{board.name}}</textarea>
   </div>
-  <div class="content">
-    <app-task [boardId]="board.id" [task]="task" *ngFor="let task of board.tasks"></app-task>
+  <div class="content" cdkDropList (cdkDropListDropped)="moveTask($event)" [cdkDropListData]="board.tasks">
+    <app-task cdkDrag
+    [boardId]="board.id" [task]="task" *ngFor="let task of board.tasks"></app-task>
+  </div>
+  <div class="board-bottom">
     <button (click)="onAddTask()" class="create-task">
       <div>+</div>
     </button>
