@@ -9,6 +9,7 @@ import { Board, Priority, Task } from './../models/board.model';
 export class BoardsService {
 
   modifyingBoard:number = -1;
+  modifyingTask:number = -1;
   $addTask = new EventEmitter<boolean>();
 
   boards: Board[] = [
@@ -82,7 +83,6 @@ export class BoardsService {
   }
 
   addTask(boardIndex: number, task: Task){
-    console.log(boardIndex);
     this.boards[boardIndex].tasks.unshift(task)
     this.organizeIds();
   }

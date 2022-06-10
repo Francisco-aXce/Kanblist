@@ -42,6 +42,13 @@ export class TaskComponent implements OnInit {
     this.showOptions = false;
   }
 
+  edit() {
+    this.boardService.modifyingBoard = this.boardId;
+    this.boardService.modifyingTask = this.task.id;
+    this.boardService.$addTask.emit(true);
+    this.showOptions = false;
+  }
+
   delete(){
     this.boardService.deleteTask(this.boardId, this.task.id);
   }

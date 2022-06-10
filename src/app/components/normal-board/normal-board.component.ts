@@ -19,9 +19,6 @@ export class NormalBoardComponent implements OnInit {
 
   @Output() dragChange = new EventEmitter<boolean>();
 
-  tst: boolean = false;
-
-
   constructor(
     private boardService: BoardsService
   ) { }

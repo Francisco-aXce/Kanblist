@@ -11,6 +11,8 @@ import { Task, Priority } from './../../models/board.model';
 
 export class AddTaskModalComponent implements OnInit {
 
+  modifying: boolean = false;
+
   taskToAdd: Task = {
     id: 0,
     name: '',
@@ -24,6 +26,15 @@ export class AddTaskModalComponent implements OnInit {
   constructor(
     private boardService:BoardsService
   ){
+    if (this.boardService.modifyingTask === -1) {
+      this.modifying = false;
+      return;
+    }
+    this.modifying = true;
+    this.taskToAdd = {...this.boardService.boards[this.boardService.modifyingBoard].tasks[this.boardService.modifyingTask]};
+  }
+
+  ngOnInit(): void {
 
   }
 
@@ -37,18 +48,33 @@ export class AddTaskModalComponent implements OnInit {
     };
   }
 
-  ngOnInit(): void {
+  close(){
+    this.resetValues();
+    this.boardService.$addTask.emit(false);
+    this.resetTask();
   }
 
-  close(){
-    this.boardService.$addTask.emit(false);
+  resetValues(){
+    this.modifying = false;
+    this.boardService.modifyingBoard = -1;
+    this.boardService.modifyingTask = -1;
   }
 
   onAddTask(){
     this.taskToAdd.status = this.taskToAdd.status === "" ? "none" : this.taskToAdd.status;
-    this.boardService.addTask(this.boardService.modifyingBoard, {...this.taskToAdd});
+
+    if(this.modifying){
+      this.boardService.boards[this.boardService.modifyingBoard].tasks[this.boardService.modifyingTask] = this.taskToAdd;
+    }else{
+      this.boardService.addTask(this.boardService.modifyingBoard, {...this.taskToAdd});
+    }
+    console.log(this.boardService.boards[this.boardService.modifyingBoard].tasks);
+
+    this.resetValues();
     this.boardService.$addTask.emit(false);
     this.resetTask();
+
+
   }
 
 }

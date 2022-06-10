@@ -8,14 +8,10 @@ import { BoardsService } from 'src/app/services/boards.service';
 })
 export class BoardsModeComponent implements OnInit {
 
-  addTaskModal: boolean = false;
-
   constructor(
-    private boardService:BoardsService
   ) { }
 
   ngOnInit(): void {
-    this.boardService.$addTask.subscribe((value) => this.addTaskModal = value);
   }
 
 

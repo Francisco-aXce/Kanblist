@@ -2,7 +2,8 @@
   <div class="modal-body">
     <button class="close" (click)="close()">x</button>
     <div class="modal-content">
-      <h1>Add task</h1>
+      <h1 *ngIf="!modifying">Add task</h1>
+      <h1 *ngIf="modifying">Edit task</h1>
       <form class="main-input" autocomplete="off" #form="ngForm">
         <label for="name">Name</label>
         <input type="text" name="name" id="name" required placeholder="Task name"
@@ -23,7 +24,10 @@
           [(ngModel)]="taskToAdd.status">
         </div>
       </div>
-      <button [disabled]="!form.valid" type="submit" class="add" (click)="onAddTask()" >Add</button>
+      <button [disabled]="!form.valid" type="submit" class="add" (click)="onAddTask()" >
+        <div *ngIf="!modifying">Add</div>
+        <div *ngIf="modifying">Edit</div>
+      </button>
     </div>
   </div>
 </div>

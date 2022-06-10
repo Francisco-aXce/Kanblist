@@ -15,6 +15,8 @@ export class BoardsComponent implements OnInit {
 
   canDrag: boolean = true;
 
+  addTaskModal: boolean = false;
+
   constructor(
     private boardsService:BoardsService
   ) {
@@ -22,6 +24,7 @@ export class BoardsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.boardsService.$addTask.subscribe((value) => this.addTaskModal = value);
   }
 
   changeDrag(value: boolean) {
