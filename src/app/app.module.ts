@@ -1,7 +1,13 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms'
+import { ReactiveFormsModule, FormsModule } from '@angular/forms'
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+// import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
+import { environment } from '../environments/environment';
+// import { provideAuth,getAuth } from '@angular/fire/auth';
+// import { provideFirestore,getFirestore } from '@angular/fire/firestore';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -13,6 +19,7 @@ import { AddBoardComponent } from './components/add-board/add-board.component';
 import { AddTaskModalComponent } from './components/add-task-modal/add-task-modal.component';
 import { BoardsModeComponent } from './pages/boards-mode/boards-mode.component';
 import { ListModeComponent } from './pages/list-mode/list-mode.component';
+
 
 @NgModule({
   declarations: [
@@ -29,8 +36,14 @@ import { ListModeComponent } from './pages/list-mode/list-mode.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    ReactiveFormsModule,
+    DragDropModule,
     FormsModule,
-    DragDropModule
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule,
+    // provideFirebaseApp(() => initializeApp(environment.firebase)),
+    // provideAuth(() => getAuth()),
+    // provideFirestore(() => getFirestore())
   ],
   providers: [],
   bootstrap: [AppComponent]

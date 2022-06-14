@@ -29,6 +29,14 @@ export class NormalBoardComponent implements OnInit {
 
   drag(value: boolean) {
     this.dragChange.emit(value);
+
+    if(value === true) {
+      this.boardService.updateBoard(this.board.payloadId!, this.board).then(() => {
+        console.log("Board updated!");
+      }).catch((error) => {
+        console.log(error);
+      })
+    }
   }
 
   onAddTask(){
@@ -37,7 +45,12 @@ export class NormalBoardComponent implements OnInit {
   }
 
   onDeleteBoard(){
-    this.boardService.deleteBoard(this.board.id);
+    this.boardService.deleteBoard(this.board.payloadId!).then(() => {
+      console.log("Board deleted!");
+      this.boardService.organizeIds();
+    }).catch((error) => {
+      console.log(error);
+    });
   }
 
   moveTask(drop: CdkDragDrop<Task[]>){

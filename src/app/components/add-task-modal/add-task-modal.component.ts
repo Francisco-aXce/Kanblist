@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormBuilder, Validator, Validators } from '@angular/forms';
 
 import { BoardsService } from 'src/app/services/boards.service';
 import { Task, Priority } from './../../models/board.model';
@@ -13,45 +14,42 @@ export class AddTaskModalComponent implements OnInit {
 
   modifying: boolean = false;
 
-  taskToAdd: Task = {
-    id: 0,
-    name: '',
-    description: '',
-    status: '',
-    priority: Priority.unassigned
-  };
+  form!: FormGroup;
 
   priorities = Object.keys({...Priority})
 
   constructor(
-    private boardService:BoardsService
+    private boardService:BoardsService,
+    private formBuilder:FormBuilder
   ){
     if (this.boardService.modifyingTask === -1) {
       this.modifying = false;
+      this.buildForm();
       return;
     }
     this.modifying = true;
-    this.taskToAdd = {...this.boardService.boards[this.boardService.modifyingBoard].tasks[this.boardService.modifyingTask]};
+    this.buildForm(this.boardService.boards[this.boardService.modifyingBoard].tasks[this.boardService.modifyingTask]);
   }
 
   ngOnInit(): void {
-
   }
 
-  resetTask(){
-    this.taskToAdd = {
-      id: 0,
-      name: '',
-      description: '',
-      status: '',
-      priority: Priority.unassigned
-    };
+  private buildForm(initial?:Task){
+    this.form = this.formBuilder.group({
+    name: [initial?.name === undefined ? '' : initial?.name, [Validators.required]],
+    description: [initial?.description === undefined ? '' : initial?.description],
+    priority: [initial?.priority === undefined ? Priority.unassigned : initial.priority],
+    status: [initial?.status === undefined ? '' : initial.status, [Validators.maxLength(8)]]
+    })
+  }
+
+  get nameInvalid() {
+    return this.form.get('name')?.touched && this.form.get('name')?.invalid;
   }
 
   close(){
     this.resetValues();
     this.boardService.$addTask.emit(false);
-    this.resetTask();
   }
 
   resetValues(){
@@ -61,20 +59,25 @@ export class AddTaskModalComponent implements OnInit {
   }
 
   onAddTask(){
-    this.taskToAdd.status = this.taskToAdd.status === "" ? "none" : this.taskToAdd.status;
+
+    this.form.markAllAsTouched();
+
+    if(this.form.invalid) return;
+
+    let task:Task = {id:0,
+    ...this.form.value};
+
+    task.status = task.status === '' ? 'none' : task.status;
 
     if(this.modifying){
-      this.boardService.boards[this.boardService.modifyingBoard].tasks[this.boardService.modifyingTask] = this.taskToAdd;
+      task.id = this.boardService.modifyingTask;
+      this.boardService.boards[this.boardService.modifyingBoard].tasks[this.boardService.modifyingTask] = task;
     }else{
-      this.boardService.addTask(this.boardService.modifyingBoard, {...this.taskToAdd});
+      this.boardService.addTask(this.boardService.modifyingBoard, task);
     }
-    console.log(this.boardService.boards[this.boardService.modifyingBoard].tasks);
 
     this.resetValues();
     this.boardService.$addTask.emit(false);
-    this.resetTask();
-
-
   }
 
 }

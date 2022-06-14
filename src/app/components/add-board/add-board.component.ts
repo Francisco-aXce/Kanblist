@@ -17,7 +17,11 @@ export class AddBoardComponent implements OnInit {
   }
 
   onAddBoard(){
-    this.boardsService.addNewBoard();
+    this.boardsService.addNewBoard().then(() => {
+      console.log("Board added!");
+    }).catch((error) => {
+      console.log(error);
+    })
   }
 
 }

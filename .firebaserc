@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "kanban-v1-165be": {
+      "hosting": {
+        "kanblist": [
+          "kanban-v1-165be"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "kanban-v1-165be"
+  }
+}

@@ -20,11 +20,33 @@ export class BoardsComponent implements OnInit {
   constructor(
     private boardsService:BoardsService
   ) {
-    this.boards = boardsService.getAllBoards();
+
   }
 
   ngOnInit(): void {
     this.boardsService.$addTask.subscribe((value) => this.addTaskModal = value);
+
+    //Get the boards from firestore, this may be in a function
+    this.boardsService.getAllBoards().subscribe(data => {
+      let tmpBoards: Board[] = [];
+      data.forEach((element: any) => {
+        tmpBoards.push({
+          payloadId:element.payload.doc.id,
+          ...element.payload.doc.data()
+        });
+      });
+      tmpBoards = tmpBoards.sort((b1,b2) => {
+        if (b1.id < b2.id) {
+            return -1;
+        }
+        if (b1.id > b2.id) {
+            return 1;
+        }
+        return 0;
+      });
+      this.boards = tmpBoards
+      this.boardsService.boards = tmpBoards;
+    })
   }
 
   changeDrag(value: boolean) {

@@ -1,5 +1,6 @@
 export interface Board {
   id: number,
+  payloadId?: string,
   name: string,
   tasks: Task[]
 }

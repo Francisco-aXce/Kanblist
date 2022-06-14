@@ -1,33 +1,44 @@
+
 <div class="modal">
-  <div class="modal-body">
+  <form class="modal-body" [formGroup]="form" (ngSubmit)="onAddTask()">
     <button class="close" (click)="close()">x</button>
     <div class="modal-content">
       <h1 *ngIf="!modifying">Add task</h1>
       <h1 *ngIf="modifying">Edit task</h1>
-      <form class="main-input" autocomplete="off" #form="ngForm">
-        <label for="name">Name</label>
-        <input type="text" name="name" id="name" required placeholder="Task name"
-        [(ngModel)]="taskToAdd.name">
+
+      <div class="main-input">
+
+        <label for="name" [class.invalid]="nameInvalid">Name</label>
+        <input type="text"
+        formControlName="name"
+        placeholder="Task name">
+
         <label for="description">Description</label>
-        <textarea name="description" required id="description" placeholder="Describe this task" [(ngModel)]="taskToAdd.description"></textarea>
-      </form>
+        <textarea formControlName="description"
+        placeholder="Describe this task"></textarea>
+
+      </div>
+
       <div class="secondary-input">
         <div>
           <label for="priority">Priority</label>
-          <select name="priority" id="priority" [(ngModel)]="taskToAdd.priority">
+          <select formControlName="priority">
             <option [value]="opt" *ngFor="let opt of priorities">{{opt}}</option>
           </select>
         </div>
+
         <div>
           <label for="status">Status</label>
-          <input type="text" name="status" id="status" placeholder="status" maxlength="8"
-          [(ngModel)]="taskToAdd.status">
+          <input formControlName="status"
+          type="text" placeholder="status" maxlength="8">
         </div>
       </div>
-      <button [disabled]="!form.valid" type="submit" class="add" (click)="onAddTask()" >
+
+      <button class="add" type="submit">
         <div *ngIf="!modifying">Add</div>
         <div *ngIf="modifying">Edit</div>
       </button>
+
     </div>
-  </div>
+  </form>
 </div>

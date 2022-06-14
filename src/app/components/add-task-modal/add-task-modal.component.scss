@@ -57,6 +57,10 @@
 
   label{
     margin-left: 20px;
+    &.invalid {
+      font-weight: bold;
+      color: red;
+    }
   }
 
   input {
