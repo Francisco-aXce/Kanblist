@@ -1,3 +1,3 @@
 # Kanblist
 
-[Kanblist](kanblist-v1.netlify.app) page
+[Kanblist](https://kanblist-v1.netlify.app/) page
